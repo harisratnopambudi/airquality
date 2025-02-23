@@ -49,55 +49,97 @@
             <h3>AQI Scale</h3>
           </div>
           <div class="scale-container">
-            <div class="scale-item good">
+            <!-- Good -->
+            <button class="scale-item good" data-aqi-level="good">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>0-50</span>
                 <span>Good</span>
               </div>
-            </div>
-            <div class="scale-item moderate">
+            </button>
+          
+            <!-- Moderate -->
+            <button class="scale-item moderate" data-aqi-level="moderate">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>51-100</span>
                 <span>Moderate</span>
               </div>
-            </div>
-            <div class="scale-item unhealthy1">
+            </button>
+          
+            <!-- Unhealthy for Sensitive Groups -->
+            <button class="scale-item unhealthy1" data-aqi-level="unhealthy1">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>101-150</span>
                 <span>Unhealthy (SG)</span>
               </div>
-            </div>
-            <div class="scale-item unhealthy2">
+            </button>
+          
+            <!-- Unhealthy -->
+            <button class="scale-item unhealthy2" data-aqi-level="unhealthy2">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>151-200</span>
                 <span>Unhealthy</span>
               </div>
-            </div>
-            <div class="scale-item veryUnhealthy">
+            </button>
+          
+            <!-- Very Unhealthy -->
+            <button class="scale-item veryUnhealthy" data-aqi-level="veryUnhealthy">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>201-300</span>
                 <span>Very Unhealthy</span>
               </div>
-            </div>
-            <div class="scale-item hazardous">
+            </button>
+          
+            <!-- Hazardous -->
+            <button class="scale-item hazardous" data-aqi-level="hazardous">
               <div class="color-box"></div>
               <div class="scale-info">
                 <span>300+</span>
                 <span>Hazardous</span>
               </div>
-            </div>
+            </button>
+          </div>
+          </div>
+          <div class="developer-credit">
+            <p>Developed by <strong>Haris Ratno Pambudi, S.T</strong></p>
           </div>
         </div>
 
-        <div class="developer-credit">
-          <p>Developed by <strong>Haris Ratno Pambudi, S.T</strong></p>
+        
+      </div>
+    </div>
+
+    <div class="aqi-modal" id="aqiModal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-header">
+          <div class="modal-icon" id="modalIcon"></div>
+          <h3 class="modal-title" id="modalTitle"></h3>
+        </div>
+        
+        <div class="color-indicator">
+          <div>
+            <p class="aqi-range" id="modalRange"></p>
+            <p class="color-code" id="colorCode"></p>
+          </div>
+        </div>
+    
+        <div class="modal-body">
+          <p class="aqi-desc" id="modalDesc"></p>
+          
+          <div class="recommendations">
+            <h4>Rekomendasi:</h4>
+            <ul id="modalRecommendations"></ul>
+          </div>
+    
+          <div class="affected-groups" id="modalAffected"></div>
         </div>
       </div>
+    </div>
     </div>
 
     <script src="assets/js/script.js"></script>

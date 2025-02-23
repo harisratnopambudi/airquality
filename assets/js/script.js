@@ -184,6 +184,145 @@ async function updateAQI() {
   }
 }
 
+// Tambahkan object deskripsi lengkap
+const aqiDescriptions = {
+  good: {
+    range: "0 - 50",
+    title: "Good",
+    color: "#4CAF50",
+    rgb: "76, 175, 80",
+    desc: "Kualitas udara sangat baik dan ideal untuk semua aktivitas luar ruangan. Tidak ada risiko kesehatan yang signifikan.",
+    recommendations: [
+      "Nikmati aktivitas luar ruangan seperti biasa",
+      "Pertahankan ventilasi alami di rumah",
+      "Ideal untuk olahraga outdoor",
+    ],
+    affectedGroups: "Tidak ada kelompok yang berisiko",
+    icon: "fa-face-smile",
+  },
+  moderate: {
+    range: "51 - 100",
+    title: "Moderate",
+    color: "#FFC107",
+    rgb: "255, 193, 7",
+    desc: "Kualitas udara masih dalam batas wajar namun mungkin berpengaruh pada individu yang sangat sensitif.",
+    recommendations: [
+      "Kelompok sensitif sebaiknya mengurangi aktivitas berat di luar ruangan",
+      "Pantau gejala iritasi pernapasan",
+      "Tutup jendela jika menggunakan AC",
+    ],
+    affectedGroups: "Penderita asma, lansia, dan anak-anak",
+    icon: "fa-face-meh",
+  },
+  unhealthy1: {
+    range: "101 - 150",
+    title: "Unhealthy for Sensitive Groups",
+    color: "#FF9800",
+    rgb: "255, 152, 0",
+    desc: "Kualitas udara mulai membahayakan bagi kelompok sensitif. Masyarakat umum mungkin mengalami iritasi ringan.",
+    recommendations: [
+      "Kelompok sensitif hindari aktivitas luar ruangan berkepanjangan",
+      "Gunakan masker jika harus keluar rumah",
+      "Pasang pembersih udara dalam ruangan",
+    ],
+    affectedGroups:
+      "Penderita penyakit pernapasan, jantung, anak-anak, dan lansia",
+    icon: "fa-mask-face",
+  },
+  unhealthy2: {
+    range: "151 - 200",
+    title: "Unhealthy",
+    color: "#F44336",
+    rgb: "244, 67, 54",
+    desc: "Seluruh populasi mulai merasakan efek kesehatan. Kelompok sensitif berisiko mengalami komplikasi serius.",
+    recommendations: [
+      "Hindari aktivitas luar ruangan yang tidak perlu",
+      "Gunakan masker N95 saat harus keluar",
+      "Gunakan air purifier dengan filter HEPA",
+    ],
+    affectedGroups: "Semua populasi, terutama kelompok sensitif",
+    icon: "fa-ban",
+  },
+  veryUnhealthy: {
+    range: "201 - 300",
+    title: "Very Unhealthy",
+    color: "#9C27B0",
+    rgb: "156, 39, 176",
+    desc: "Kondisi darurat kesehatan. Peningkatan signifikan dalam efek kesehatan serius bagi seluruh populasi.",
+    recommendations: [
+      "Hindari semua aktivitas luar ruangan",
+      "Tutup semua jendela dan pintu",
+      "Segera cari tempat dengan udara bersih",
+    ],
+    affectedGroups: "Seluruh populasi tanpa terkecuali",
+    icon: "fa-triangle-exclamation",
+  },
+  hazardous: {
+    range: "300+",
+    title: "Hazardous",
+    color: "#795548",
+    rgb: "121, 85, 72",
+    desc: "Kondisi berbahaya yang mengancam jiwa. Segera ambil tindakan perlindungan ekstra.",
+    recommendations: [
+      "Tetap di dalam ruangan dengan sistem filtrasi udara",
+      "Gunakan oksigen tambahan jika diperlukan",
+      "Evakuasi ke area dengan udara bersih jika memungkinkan",
+    ],
+    affectedGroups: "Semua makhluk hidup di area terdampak",
+    icon: "fa-skull-crossbones",
+  },
+};
+
+// Fungsi untuk menangani modal
+function setupModal() {
+  const modal = document.getElementById("aqiModal");
+  const span = document.getElementsByClassName("close")[0];
+
+  // Buka modal saat scale item diklik
+  document.querySelectorAll(".scale-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const level = item.dataset.aqiLevel;
+      showModal(level);
+    });
+  });
+
+  // Tutup modal
+  span.onclick = () => (modal.style.display = "none");
+  window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = "none";
+  };
+}
+
+function showModal(level) {
+  const modal = document.getElementById("aqiModal");
+  const desc = aqiDescriptions[level];
+
+  // Set konten modal
+  document.getElementById("modalTitle").textContent = desc.title;
+  document.getElementById("modalDesc").textContent = desc.desc;
+
+  modalIcon.innerHTML = `<i class="fas ${desc.icon}"></i>`;
+  modalIcon.style.backgroundColor = `rgba(${desc.rgb}, 0.2)`;
+  modalIcon.style.color = desc.color;
+
+  // Set rekomendasi
+  const recommendationsList = desc.recommendations
+    .map((rec) => `<li>${rec}</li>`)
+    .join("");
+  document.getElementById("modalRecommendations").innerHTML =
+    recommendationsList;
+
+  // Set kelompok terdampak
+  document.getElementById(
+    "modalAffected"
+  ).innerHTML = `🏥 Kelompok Terdampak: ${desc.affectedGroups}`;
+
+  modal.style.display = "flex";
+}
+
+// Panggil setupModal di akhir script.js
+setupModal();
+
 // Update setiap 10 menit
 setInterval(updateAQI, 600000);
 updateAQI();

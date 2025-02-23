@@ -62,14 +62,40 @@ h1 {
 }
 
 .indicators-grid {
-  display: block; /* Ubah dari grid ke block */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
   margin: 1.5rem 0;
 }
 
+.pollutant {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pollutant h3 {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.pollutant .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.pollutant .unit {
+  color: #666;
+  font-size: 0.9rem;
+}
+
 .weather-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .weather-item {
@@ -124,88 +150,4 @@ h1 {
   .weather-item {
     font-size: 1rem;
   }
-}
-
-/* AQI Scale Styles */
-.aqi-description {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1.5rem;
-}
-
-.description-header h3 {
-  color: #333;
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-
-.scale-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 0.5rem;
-}
-
-.scale-item {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem;
-  border-radius: 6px;
-  background: rgba(0, 0, 0, 0.03);
-}
-
-.color-box {
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-  margin-right: 0.5rem;
-}
-
-.scale-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.scale-info span:first-child {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.scale-info span:last-child {
-  font-size: 0.8rem;
-  color: #666;
-}
-
-/* Warna sesuai kategori */
-.good .color-box {
-  background: #4caf50;
-}
-.moderate .color-box {
-  background: #ffc107;
-}
-.unhealthy1 .color-box {
-  background: #ff9800;
-}
-.unhealthy2 .color-box {
-  background: #f44336;
-}
-.veryUnhealthy .color-box {
-  background: #9c27b0;
-}
-.hazardous .color-box {
-  background: #795548;
-}
-
-.developer-credit {
-  text-align: center;
-  margin-top: 2rem;
-  color: #666;
-  font-size: 0.9rem;
-  padding: 1rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.developer-credit strong {
-  color: #444;
-  font-weight: 600;
 }

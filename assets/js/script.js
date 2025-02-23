@@ -8,42 +8,16 @@ const API_KEY = "b5ff0398-6674-41f5-bcc1-b3ad6322dcc1";
 const API_URL = "https://api.airvisual.com/v2/nearest_city";
 
 const colorScheme = {
-  good: {
-    key: "good",
-    bg: "#E6F4D7",
-    text: "#4CAF50",
-    status: "Good",
-  },
-  moderate: {
-    key: "moderate",
-    bg: "#FFF3C4",
-    text: "#FFC107",
-    status: "Moderate",
-  },
+  good: { bg: "#E6F4D7", text: "#4CAF50", status: "Good" },
+  moderate: { bg: "#FFF3C4", text: "#FFC107", status: "Moderate" },
   unhealthy1: {
-    key: "unhealthy1",
     bg: "#FFE0B2",
     text: "#FF9800",
-    status: "Unhealthy (SG)",
+    status: "Unhealthy for Sensitive Groups",
   },
-  unhealthy2: {
-    key: "unhealthy2",
-    bg: "#FFCDD2",
-    text: "#F44336",
-    status: "Unhealthy",
-  },
-  veryUnhealthy: {
-    key: "veryUnhealthy",
-    bg: "#E1BEE7",
-    text: "#9C27B0",
-    status: "Very Unhealthy",
-  },
-  hazardous: {
-    key: "hazardous",
-    bg: "#D7CCC8",
-    text: "#795548",
-    status: "Hazardous",
-  },
+  unhealthy2: { bg: "#FFCDD2", text: "#F44336", status: "Unhealthy" },
+  veryUnhealthy: { bg: "#E1BEE7", text: "#9C27B0", status: "Very Unhealthy" },
+  hazardous: { bg: "#D7CCC8", text: "#795548", status: "Hazardous" },
 };
 
 let coords;
@@ -51,7 +25,7 @@ let coords;
 function getLocation() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
-      reject("Geolocation tidak didukung browser Anda");
+      reject("Geolocation is not supported by your browser");
     } else {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -71,7 +45,7 @@ async function fetchAQI(coords) {
     const response = await fetch(url);
 
     if (!response.ok) {
-      throw new Error(`Error HTTP! status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
     const data = await response.json();
@@ -79,39 +53,41 @@ async function fetchAQI(coords) {
     if (data.status === "success") {
       return {
         aqi: data.data?.current?.pollution?.aqius || 0,
-        city: data.data?.city || "Tidak Dikenali",
+        pm25: data.data?.current?.pollution?.pm25 || "N/A",
+        city: data.data?.city || "Unknown",
         temperature: data.data?.current?.weather?.tp || "N/A",
         humidity: data.data?.current?.weather?.hu || "N/A",
         windSpeed: data.data?.current?.weather?.ws || 0,
         windDirection: data.data?.current?.weather?.wd || 0,
       };
     }
-    throw new Error(data.data?.message || "Gagal memuat data");
+    throw new Error(data.data?.message || "API request failed");
   } catch (error) {
-    throw new Error("Gagal mengambil data: " + error.message);
+    throw new Error("Failed to fetch air quality data: " + error.message);
   }
 }
 
 function getWindDirection(degrees) {
   const directions = [
-    "U",
-    "U-TL",
-    "TL",
-    "TL-T",
-    "T",
-    "T-SL",
-    "SL",
-    "SL-S",
+    "N",
+    "NNE",
+    "NE",
+    "ENE",
+    "E",
+    "ESE",
+    "SE",
+    "SSE",
     "S",
-    "S-BD",
-    "BD",
-    "BD-B",
-    "B",
-    "B-BL",
-    "BL",
-    "BL-U",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
   ];
-  return directions[Math.round(degrees / 22.5) % 16] || "-";
+  const index = Math.round(degrees / 22.5) % 16;
+  return directions[index] || "N/A";
 }
 
 function updateDisplay(data) {
@@ -119,16 +95,16 @@ function updateDisplay(data) {
 
   aqiValue.textContent = data.aqi.toString().padStart(3, "0");
   locationElement.textContent = data.city;
-  lastUpdate.textContent = now.toLocaleTimeString("id-ID");
+  lastUpdate.textContent = now.toLocaleTimeString();
 
-  document.getElementById("temperature").textContent = data.temperature;
-  document.getElementById("humidity").textContent = data.humidity;
-  document.getElementById("windSpeed").textContent = (
-    data.windSpeed * 3.6
-  ).toFixed(1);
-  document.getElementById("windDirection").textContent = getWindDirection(
-    data.windDirection
-  );
+  document.getElementById("pm25").textContent = data.pm25 ?? "N/A";
+  document.getElementById("temperature").textContent =
+    data.temperature ?? "N/A";
+  document.getElementById("humidity").textContent = data.humidity ?? "N/A";
+  document.getElementById("windSpeed").textContent =
+    (data.windSpeed * 3.6).toFixed(1) ?? "N/A";
+  document.getElementById("windDirection").textContent =
+    getWindDirection(data.windDirection) ?? "N/A";
 
   document.getElementById(
     "windIcon"
@@ -152,20 +128,8 @@ function updateColorsBasedOnAQI(aqi) {
 function applyColors(scheme) {
   body.style.backgroundColor = scheme.bg;
   aqiValue.style.color = scheme.text;
-  aqiStatus.textContent = `${scheme.status} | ${getHealthAdvice(scheme.key)}`;
+  aqiStatus.textContent = scheme.status;
   aqiStatus.style.color = scheme.text;
-}
-
-function getHealthAdvice(key) {
-  const advice = {
-    good: "Aman beraktivitas di luar",
-    moderate: "Kelompok sensitif perlu hati-hati",
-    unhealthy1: "Kurangi aktivitas luar ruangan",
-    unhealthy2: "Gunakan masker jika keluar rumah",
-    veryUnhealthy: "Hindari aktivitas di luar",
-    hazardous: "Jangan keluar rumah!",
-  };
-  return advice[key] || "";
 }
 
 async function updateAQI() {
@@ -178,12 +142,11 @@ async function updateAQI() {
     aqiStatus.style.color = "#F44336";
     console.error("Error:", error);
 
-    document.querySelectorAll(".weather-item span").forEach((el) => {
-      el.textContent = "-";
+    document.querySelectorAll(".value, .weather-item span").forEach((el) => {
+      el.textContent = "N/A";
     });
   }
 }
 
-// Update setiap 10 menit
 setInterval(updateAQI, 600000);
 updateAQI();

@@ -17,13 +17,12 @@
         <div class="aqi-value" id="aqiValue">00</div>
         <div class="aqi-status" id="aqiStatus">Loading...</div>
 
+        <div class="info">
+          <p>Location: <span id="location">Detecting...</span></p>
+          <p>Last Update: <span id="lastUpdate">00:00:00</span></p>
+        </div>
+        <!-- Modified indicators-grid section -->
         <div class="indicators-grid">
-          <div class="pollutant">
-            <h3><i class="fas fa-smog"></i> PM2.5</h3>
-            <div class="value" id="pm25">-</div>
-            <div class="unit">µg/m³</div>
-          </div>
-
           <div class="weather-info">
             <div class="weather-item">
               <i class="fas fa-thermometer-half"></i>
@@ -45,9 +44,58 @@
           </div>
         </div>
 
-        <div class="info">
-          <p>Location: <span id="location">Detecting...</span></p>
-          <p>Last Update: <span id="lastUpdate">00:00:00</span></p>
+        <div class="aqi-description">
+          <div class="description-header">
+            <h3>AQI Scale</h3>
+          </div>
+          <div class="scale-container">
+            <div class="scale-item good">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>0-50</span>
+                <span>Good</span>
+              </div>
+            </div>
+            <div class="scale-item moderate">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>51-100</span>
+                <span>Moderate</span>
+              </div>
+            </div>
+            <div class="scale-item unhealthy1">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>101-150</span>
+                <span>Unhealthy (SG)</span>
+              </div>
+            </div>
+            <div class="scale-item unhealthy2">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>151-200</span>
+                <span>Unhealthy</span>
+              </div>
+            </div>
+            <div class="scale-item veryUnhealthy">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>201-300</span>
+                <span>Very Unhealthy</span>
+              </div>
+            </div>
+            <div class="scale-item hazardous">
+              <div class="color-box"></div>
+              <div class="scale-info">
+                <span>300+</span>
+                <span>Hazardous</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="developer-credit">
+          <p>Developed by <strong>Haris Ratno Pambudi, S.T</strong></p>
         </div>
       </div>
     </div>

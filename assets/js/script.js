@@ -192,13 +192,13 @@ const aqiDescriptions = {
     title: "Good",
     color: "#4CAF50",
     rgb: "76, 175, 80",
-    desc: "Kualitas udara sangat baik dan ideal untuk semua aktivitas luar ruangan. Tidak ada risiko kesehatan yang signifikan.",
+    desc: "Udara bersih dan segar. Sangat aman untuk beraktivitas di luar ruangan bagi semua orang.",
     recommendations: [
-      "Nikmati aktivitas luar ruangan seperti biasa",
-      "Pertahankan ventilasi alami di rumah",
-      "Ideal untuk olahraga outdoor",
+      "Nikmati aktivitas luar ruangan tanpa batasan.",
+      "Buka jendela untuk sirkulasi udara segar.",
+      "Cocok untuk olahraga dan rekreasi di luar."
     ],
-    affectedGroups: "Tidak ada kelompok yang berisiko",
+    affectedGroups: "Tidak ada kelompok yang berisiko.",
     icon: "fa-face-smile",
   },
   moderate: {
@@ -206,13 +206,13 @@ const aqiDescriptions = {
     title: "Moderate",
     color: "#FFC107",
     rgb: "255, 193, 7",
-    desc: "Kualitas udara masih dalam batas wajar namun mungkin berpengaruh pada individu yang sangat sensitif.",
+    desc: "Kualitas udara masih tergolong baik, namun beberapa orang yang sangat sensitif mungkin mulai merasakan efek ringan.",
     recommendations: [
-      "Kelompok sensitif sebaiknya mengurangi aktivitas berat di luar ruangan",
-      "Pantau gejala iritasi pernapasan",
-      "Tutup jendela jika menggunakan AC",
+      "Aktivitas luar ruangan tetap aman untuk sebagian besar orang.",
+      "Kelompok sensitif (asma, lansia, anak-anak) sebaiknya mengurangi aktivitas berat di luar.",
+      "Perhatikan gejala seperti batuk atau sesak napas ringan."
     ],
-    affectedGroups: "Penderita asma, lansia, dan anak-anak",
+    affectedGroups: "Orang dengan gangguan pernapasan, lansia, dan anak-anak.",
     icon: "fa-face-meh",
   },
   unhealthy1: {
@@ -220,14 +220,13 @@ const aqiDescriptions = {
     title: "Unhealthy for Sensitive Groups",
     color: "#FF9800",
     rgb: "255, 152, 0",
-    desc: "Kualitas udara mulai membahayakan bagi kelompok sensitif. Masyarakat umum mungkin mengalami iritasi ringan.",
+    desc: "Udara mulai kurang sehat, terutama bagi kelompok sensitif. Masyarakat umum umumnya masih aman, namun bisa mulai merasakan iritasi ringan.",
     recommendations: [
-      "Kelompok sensitif hindari aktivitas luar ruangan berkepanjangan",
-      "Gunakan masker jika harus keluar rumah",
-      "Pasang pembersih udara dalam ruangan",
+      "Kelompok sensitif sebaiknya membatasi aktivitas di luar ruangan.",
+      "Gunakan masker jika harus keluar rumah.",
+      "Tutup jendela untuk mengurangi masuknya polusi."
     ],
-    affectedGroups:
-      "Penderita penyakit pernapasan, jantung, anak-anak, dan lansia",
+    affectedGroups: "Penderita asma, penyakit jantung, lansia, anak-anak, ibu hamil.",
     icon: "fa-mask-face",
   },
   unhealthy2: {
@@ -235,13 +234,13 @@ const aqiDescriptions = {
     title: "Unhealthy",
     color: "#F44336",
     rgb: "244, 67, 54",
-    desc: "Seluruh populasi mulai merasakan efek kesehatan. Kelompok sensitif berisiko mengalami komplikasi serius.",
+    desc: "Udara tidak sehat untuk semua orang. Efek kesehatan bisa dirasakan oleh masyarakat umum, terutama kelompok sensitif.",
     recommendations: [
-      "Hindari aktivitas luar ruangan yang tidak perlu",
-      "Gunakan masker N95 saat harus keluar",
-      "Gunakan air purifier dengan filter HEPA",
+      "Batasi aktivitas di luar ruangan untuk semua orang.",
+      "Gunakan masker dan air purifier di dalam rumah.",
+      "Segera cari pertolongan medis jika mengalami gejala berat."
     ],
-    affectedGroups: "Semua populasi, terutama kelompok sensitif",
+    affectedGroups: "Semua orang, terutama penderita penyakit pernapasan dan jantung.",
     icon: "fa-ban",
   },
   veryUnhealthy: {
@@ -249,13 +248,13 @@ const aqiDescriptions = {
     title: "Very Unhealthy",
     color: "#9C27B0",
     rgb: "156, 39, 176",
-    desc: "Kondisi darurat kesehatan. Peningkatan signifikan dalam efek kesehatan serius bagi seluruh populasi.",
+    desc: "Kondisi udara sangat buruk. Efek kesehatan serius bisa terjadi pada semua orang.",
     recommendations: [
-      "Hindari semua aktivitas luar ruangan",
-      "Tutup semua jendela dan pintu",
-      "Segera cari tempat dengan udara bersih",
+      "Hindari semua aktivitas di luar ruangan.",
+      "Tetap di dalam rumah dengan ventilasi tertutup.",
+      "Siapkan obat-obatan darurat jika memiliki riwayat penyakit."
     ],
-    affectedGroups: "Seluruh populasi tanpa terkecuali",
+    affectedGroups: "Seluruh populasi, tanpa terkecuali.",
     icon: "fa-triangle-exclamation",
   },
   hazardous: {
@@ -263,13 +262,13 @@ const aqiDescriptions = {
     title: "Hazardous",
     color: "#795548",
     rgb: "121, 85, 72",
-    desc: "Kondisi berbahaya yang mengancam jiwa. Segera ambil tindakan perlindungan ekstra.",
+    desc: "Udara sangat berbahaya. Risiko kesehatan serius bahkan kematian bisa terjadi jika terpapar dalam waktu lama.",
     recommendations: [
-      "Tetap di dalam ruangan dengan sistem filtrasi udara",
-      "Gunakan oksigen tambahan jika diperlukan",
-      "Evakuasi ke area dengan udara bersih jika memungkinkan",
+      "Jangan keluar rumah kecuali darurat.",
+      "Gunakan alat pelindung pernapasan jika harus keluar.",
+      "Evakuasi ke tempat dengan udara lebih bersih jika memungkinkan."
     ],
-    affectedGroups: "Semua makhluk hidup di area terdampak",
+    affectedGroups: "Semua orang, terutama kelompok rentan.",
     icon: "fa-skull-crossbones",
   },
 };

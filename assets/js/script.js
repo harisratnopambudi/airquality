@@ -135,6 +135,7 @@ function updateDisplay(data) {
   ).style.transform = `rotate(${data.windDirection}deg)`;
 
   updateColorsBasedOnAQI(data.aqi);
+  updateAqiBadge();
 }
 
 function updateColorsBasedOnAQI(aqi) {
@@ -326,3 +327,35 @@ setupModal();
 // Update setiap 10 menit
 setInterval(updateAQI, 600000);
 updateAQI();
+
+function updateAqiBadge() {
+  const aqiValue = document.getElementById('aqiValue');
+  const aqiBadge = document.getElementById('aqiBadge');
+  let val = parseInt(aqiValue.textContent, 10);
+  let badge = aqiBadge;
+  if (val <= 50) {
+    badge.textContent = 'Good';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-green-400 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-green-500 drop-shadow-lg';
+  } else if (val <= 100) {
+    badge.textContent = 'Moderate';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-yellow-400 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-yellow-400 drop-shadow-lg';
+  } else if (val <= 150) {
+    badge.textContent = 'Unhealthy (SG)';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-orange-400 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-orange-400 drop-shadow-lg';
+  } else if (val <= 200) {
+    badge.textContent = 'Unhealthy';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-red-400 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-red-400 drop-shadow-lg';
+  } else if (val <= 300) {
+    badge.textContent = 'Very Unhealthy';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-purple-500 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-purple-500 drop-shadow-lg';
+  } else {
+    badge.textContent = 'Hazardous';
+    badge.className = 'inline-block rounded-full px-3 py-1 text-xs font-bold text-white bg-amber-900 shadow-md transition-colors duration-300';
+    aqiValue.className = 'text-6xl font-extrabold transition-colors duration-300 text-amber-900 drop-shadow-lg';
+  }
+}

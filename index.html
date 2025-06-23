@@ -57,9 +57,9 @@
       }
     </style>
   </head>
-  <body class="min-h-screen flex items-center justify-center relative overflow-hidden">
+  <body class="min-h-screen flex flex-col relative">
     <!-- Weather background: sky gradient, sun/moon, clouds, stars -->
-    <div id="weather-bg" class="absolute inset-0 -z-10">
+    <div id="weather-bg" class="absolute inset-0 -z-10 pointer-events-none">
       <!-- Sky gradient (default siang) -->
       <div id="sky-gradient" class="w-full h-full bg-gradient-to-b from-blue-300 via-blue-100 to-white transition-colors duration-700"></div>
       <!-- Sun (default show) -->
@@ -81,7 +81,7 @@
       <svg id="cloud2" class="absolute bottom-10 right-10 w-40 h-20 opacity-50 animate-cloud-move2" viewBox="0 0 80 32" fill="none"><ellipse cx="30" cy="20" rx="24" ry="12" fill="#fff"/><ellipse cx="60" cy="16" rx="16" ry="8" fill="#fff"/></svg>
       <svg id="cloud3" class="absolute bottom-24 left-1/3 w-28 h-12 opacity-40 animate-cloud-move3" viewBox="0 0 56 24" fill="none"><ellipse cx="18" cy="14" rx="14" ry="8" fill="#fff"/><ellipse cx="38" cy="10" rx="10" ry="6" fill="#fff"/></svg>
     </div>
-    <div class="w-full max-w-lg p-6 bg-white/70 rounded-3xl shadow-2xl backdrop-blur-2xl fade-in relative overflow-hidden">
+    <div class="w-full max-w-lg p-6 bg-white/70 rounded-3xl shadow-2xl backdrop-blur-2xl fade-in relative">
       <!-- Decorative floating icon -->
       <div class="absolute -top-8 -right-8 bg-gradient-to-tr from-blue-400 to-green-400 rounded-full w-24 h-24 opacity-30 blur-2xl z-0"></div>
       <div class="flex flex-col items-center z-10 relative">
